@@ -134,7 +134,7 @@ void TablaMultiplicar(){
     Scanner sc = new Scanner(System.in);
     System.out.println("\nINTRODUZCA UN NUMERO PARA MOSTRAR LAS TABLAS DE MULTIPLICAR HASTA ESE NUMERO: ");
     N = sc.nextInt();
-    for (int i = 1; i <= N; i++) {
+    for (int i = 1; i <= N; i++){
         System.out.println("-TABLA DEL "+i);
         for (int j = 1; j <= 10; j++) {
             int [] tabla1;
