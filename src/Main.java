@@ -1,4 +1,9 @@
 /*
+5. (10 minutos) Escribe un programa que visualice por pantalla la tabla de
+multiplicar de los 10 primeros números naturales. Utilizar una función que
+reciba un número N y devuelva un array de arrays con las tablas de multiplicar
+de 0 a 9 de los N números.
+
 6. (20 minutos) Escribe un programa que muestre por pantalla la lista de los N
 primeros números primos. Realiza una función que reciba N, devuelve un
 array conteniendo los N primeros números primos y posteriormente
@@ -63,7 +68,7 @@ palíndroma.*/
 import java.util.Scanner;
 import java.util.ArrayList;
 public
- void TiemposAnios(){
+void TiemposAnios(){
     Scanner sc = new Scanner(System.in);
     System.out.println("INTRODUZCA EL NUMERO DE ANIOS:");
     int years = sc.nextInt();
@@ -104,32 +109,31 @@ void Multiplos5(){
 }
 void MaxMin(){
 
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Integer> lista = new ArrayList<>();
+    Scanner sc = new Scanner(System.in);
+    ArrayList<Integer> lista = new ArrayList<>();
 
-        int numero;
-        int max = Integer.MIN_VALUE;
+    int numero;
+    int max = Integer.MIN_VALUE;
+    int min = Integer.MAX_VALUE;
 
-        int min = Integer.MAX_VALUE;
+    do {
+        System.out.print("INTRODUZCA UN NUMERO: ");
+        numero = sc.nextInt();
 
-        do {
-            System.out.print("INTRODUZCA UN NUMEROS (con - se termina): ");
-            numero = sc.nextInt();
-
-            if (numero >= 0) {
-                lista.add(numero); // Agregar a la lista
-                max = Math.max(max, numero); // Actualizar máximo
-                if (numero > 0) {
-                    min = Math.min(min, numero); // Actualizar mínimo
-                }
+        if (numero >= 0) {
+            lista.add(numero); // Agregar a la lista
+            max = Math.max(max, numero); // Actualizar máximo
+            if (numero > 0) {
+                min = Math.min(min, numero); // Actualizar mínimo
             }
-        } while (numero >= 0);
+        }
+    } while (numero >= 0);
 
-        System.out.println("\nNumeros introducidos: " + lista);
-        System.out.println("Has introducido " + lista.size() + " numeros.");
-        System.out.println("El número máximo introducido es " + max);
-        System.out.println("El número mínimo introducido es " + min);
-    }
+    System.out.println("\nNumeros introducidos: " + lista);
+    System.out.println("Has introducido " + lista.size() + " numeros.");
+    System.out.println("El número máximo introducido es " + max);
+    System.out.println("El número mínimo introducido es " + min);
+}
 void TablaMultiplicar(){
     int N;
     Scanner sc = new Scanner(System.in);
