@@ -109,6 +109,7 @@ void MaxMin(){
 
         int numero;
         int max = Integer.MIN_VALUE;
+
         int min = Integer.MAX_VALUE;
 
         do {
