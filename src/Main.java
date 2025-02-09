@@ -134,7 +134,25 @@ void MaxMin(){
         System.out.println("El número máximo introducido es " + max);
         System.out.println("El número mínimo introducido es " + min);
     }
-
+void TablaMultiplicar(){
+    int N;
+    Scanner sc = new Scanner(System.in);
+    System.out.println("\nINTRODUZCA UN NUMERO PARA MOSTRAR LAS TABLAS DE MULTIPLICAR HASTA ESE NUMERO: ");
+    N = sc.nextInt();
+    for (int i = 1; i <= N; i++){
+        System.out.println("-TABLA DEL "+i);
+        for (int j = 1; j <= 10; j++) {
+            int [] tabla1;
+            tabla1 = new int [10];
+            int [] tabla2;
+            tabla2 = new int [10];
+            tabla2[i-1] = i;
+            tabla1[i-1] = tabla2[i-1] * j;
+            System.out.println("\t"+tabla2[i-1] + " x " + j + " = " + tabla1[i-1]);
+        }
+        System.out.println("\n");
+    }
+}
 
 public void main() {
     //1
@@ -146,6 +164,7 @@ public void main() {
     //4
     MaxMin();
     //5
+    TablaMultiplicar();
 
 
 }
