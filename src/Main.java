@@ -1,8 +1,4 @@
 /*
-5. (10 minutos) Escribe un programa que visualice por pantalla la tabla de
-multiplicar de los 10 primeros números naturales. Utilizar una función que
-reciba un número N y devuelva un array de arrays con las tablas de multiplicar
-de 0 a 9 de los N números.
 
 6. (20 minutos) Escribe un programa que muestre por pantalla la lista de los N
 primeros números primos. Realiza una función que reciba N, devuelve un
@@ -153,6 +149,41 @@ void TablaMultiplicar(){
         System.out.println("\n");
     }
 }
+void Primos(){
+    Scanner sc = new Scanner(System.in);
+    System.out.print("Introduce hasta qué primo quieres llegar: ");
+    int contador = sc.nextInt();
+    sc.close();
+
+    int numero = 2;
+    System.out.println("Los primeros " + contador + " números primos son:");
+    int[] primos = new int[contador];
+    int index = 0;
+
+    while (contador > 0) {
+        boolean esPrimo = true;
+        if (numero < 2) {
+            esPrimo = false;
+        } else {
+            for (int i = 2; i <= Math.sqrt(numero); i++) {
+                if (numero % i == 0) {
+                    esPrimo = false;
+                    break;
+                }
+            }
+        }
+
+        if (esPrimo) {
+            primos[index] = numero;
+            index++;
+            contador--;
+        }
+        numero++;
+    }
+    System.out.println(Arrays.toString(primos));
+   }
+
+
 
 public void main() {
     //1
@@ -165,6 +196,8 @@ public void main() {
     MaxMin();
     //5
     TablaMultiplicar();
+    //6
+    Primos();
 
 
 }
