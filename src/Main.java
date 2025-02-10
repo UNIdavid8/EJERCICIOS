@@ -1,30 +1,4 @@
 /*
-
-6. (20 minutos) Escribe un programa que muestre por pantalla la lista de los N
-primeros números primos. Realiza una función que reciba N, devuelve un
-array conteniendo los N primeros números primos y posteriormente
-imprima el array en el main.
-
-7. (15 minutos) Escribe un programa que lea un número entero de teclado, lo
-guarde en una variable, lo envíe a una función que lo descomponga en factores
-primos, y dicha función devuelva un array que contenga los factores primos.
-Posteriormente imprima el array en el main. ; por ejemplo 40 = 2 * 2
-
-8. (20 minutos) Empleando un array, escribir un programa que pida al usuario
-números enteros hasta que se introduzca el número 0. A continuación, calcular
-la media, el mínimo y el máximo de los datos introducidos. Utilice funciones
-independientes para: a) recibir N números enteros por teclado hasta que el
-usuario introduzca un 0; b) Calcule la media de los elementos de un array; c)
-calcule el mínimo de los elementos de un array; y d) Calcule el máximo de los
-elementos de un array.
-
-9. (15 minutos) Escribir un programa que solicite al usuario dos vectores de N
-elementos y que imprima su producto escalar. Utilice un array para representar
-el vector de N elementos. Realice la entrada de usuario por teclado en una
-función que reciba las dimensiones del vector a la que se invoca dos veces
-(una por vector) y otra función que calcule el producto escalar recibiendo dos
-arrays que representan dos vectores.
-
 10. (15 minutos) Escribir un programa que rellene una matriz cuadrada (las
 dimensiones de la matriz serán un parámetro que se pida al usuario) con
 números aleatorios de tal modo que la matriz sea simétrica. Imprimir la matriz
@@ -63,6 +37,9 @@ palíndroma.*/
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 public
 void TiemposAnios(){
     Scanner sc = new Scanner(System.in);
@@ -84,7 +61,6 @@ void TamaniosDatos(){
 }
 void Multiplos5(){
     int contador = 0;
-    int x = 0;
     int[] multiplos;
     multiplos = new int [21];
     for(int i=1; i<=100; i++){
@@ -153,7 +129,7 @@ void Primos(){
     Scanner sc = new Scanner(System.in);
     System.out.print("Introduce hasta qué primo quieres llegar: ");
     int contador = sc.nextInt();
-    sc.close();
+
 
     int numero = 2;
     System.out.println("Los primeros " + contador + " números primos son:");
@@ -165,14 +141,13 @@ void Primos(){
         if (numero < 2) {
             esPrimo = false;
         } else {
-            for (int i = 2; i <= Math.sqrt(numero); i++) {
+            for (int i = 2; i <= sqrt(numero); i++) {
                 if (numero % i == 0) {
                     esPrimo = false;
                     break;
                 }
             }
         }
-
         if (esPrimo) {
             primos[index] = numero;
             index++;
@@ -182,12 +157,105 @@ void Primos(){
     }
     System.out.println(Arrays.toString(primos));
    }
+void Factorizar() {
+    int numero;
+    System.out.print("Introduzca un número a factorizar: ");
+       Scanner sc = new Scanner(System.in);
+        numero  = sc.nextInt();
 
+        ArrayList<Integer> factores = new ArrayList<>();
+        int divisor = 2;
+        while (numero >= divisor) {
+            if (numero % divisor == 0) {
+                factores.add(divisor);
+                numero /= divisor;
+            } else {
+                divisor++;
+            }
+        }
+        System.out.print("Descomposición en factores primos: ");
+        for (int i = 0; i < factores.size(); i++) {
+            if (i == factores.size() - 1) {
+                System.out.print(factores.get(i));
+            } else {
+                System.out.print(factores.get(i) + " * ");
+            }
+        }
+        System.out.println("\nCantidad de factores encontrados: " + factores.size());
+    }
+void calcularEstadisticas() {
+    Scanner sc = new Scanner(System.in);
+    ArrayList<Integer> numeros = new ArrayList<>();
+    int n;
 
+    System.out.println("Introduce números ( número negativo o Cero, ACABA):");
+    while (true) {
+        System.out.print("Número: ");
+        n = sc.nextInt();
+        if (n <= 0) break;
+        numeros.add(n);
+    }
 
+    if (numeros.isEmpty()) {
+        System.out.println("No se ingresaron números válidos.");
+        return;
+    }
+
+    int suma = 0;
+    int max = Integer.MIN_VALUE;
+    int min = Integer.MAX_VALUE;
+
+    for (int num : numeros) {
+        suma += num;
+        if (num > max) max = num;
+        if (num < min) min = num;
+    }
+
+    float media = (float) suma / numeros.size();
+
+    System.out.println("La media de los números es: " + media);
+    System.out.println("El número máximo es: " + max);
+    System.out.println("El número mínimo es: " + min);
+}
+void ProductoEscalar(){
+    int n;
+
+    System.out.println("Cuantas dimensiones quieres para los vectores? ");
+    Scanner sc = new Scanner(System.in);
+    n = sc.nextInt();
+
+    ArrayList<Integer> vector1;
+    vector1 = new ArrayList<>(n);
+
+    ArrayList<Integer> vector2;
+    vector2 = new ArrayList<>(n);
+
+    System.out.println("Vector A: ");
+    for (int i = 1; i <= n; i++) {
+        System.out.println("Coordenda " +i+ " : ");
+        vector1.add(i - 1, sc.nextInt());
+    }
+
+    System.out.println("Vector B: ");
+    for (int i = 1; i <= n; i++) {
+        System.out.println("Coordenda " +i+ " : ");
+        vector2.add(i - 1, sc.nextInt());
+    }
+    //PRODUCTO ESCALAR
+    double v1 = 0;
+    double v2 = 0;
+    for (int i = 0; i < vector1.size(); i++) {
+        v1 += pow(vector1.get(i), 2);
+        v2 += pow(vector2.get(i), 2);
+    }
+    double resultado = sqrt(v1) * sqrt(v2);
+    System.out.println("Asumiendo mismo angulo respecto del plano: ");
+    System.out.println("A "+ vector1 +" * B "+ vector2 +" = "+ String.format("%.2f", resultado));
+
+}
 public void main() {
     //1
-    TiemposAnios();
+   TiemposAnios();
     //2
     TamaniosDatos();
     //3
@@ -198,6 +266,10 @@ public void main() {
     TablaMultiplicar();
     //6
     Primos();
-
-
+    //7
+    Factorizar();
+    //8
+    calcularEstadisticas();
+    //9
+    ProductoEscalar();
 }
