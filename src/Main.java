@@ -1,46 +1,9 @@
-/*
-10. (15 minutos) Escribir un programa que rellene una matriz cuadrada (las
-dimensiones de la matriz serán un parámetro que se pida al usuario) con
-números aleatorios de tal modo que la matriz sea simétrica. Imprimir la matriz
-por pantalla. Realice todo en una única función a la que se llama desde el
-main.
-
-11. (20 minutos) Escribir un programa que multiplique dos matrices. Sus
-dimensiones y valores deben de solicitarse al usuario por teclado y tras realizar
-la multiplicación debe visualizarse en pantalla ambas matrices y el
-Página 4
-resultado de la multiplicación. Cree una nueva función similar al ejercicio 9
-pero que recibirá vectores de varias dimensiones. Realice otra función
-multiplicar matrices que reciba dos arrays de dos dimensiones que representan
-2 vectores y devuelva otro array de dos dimensiones que contenga su
-multiplicación. En caso de no ser compatibles las dimensiones la función
-indicará que ha habido un error.
-
-12. (15 minutos) Escribe un programa que acepte una cadena de caracteres (que
-podrá contener cualquier carácter a excepción del retorno de carro) y que diga
-cuántas vocales contiene. Realice la entrada de teclado en una función
-(lectura de una string) y el cálculo de vocales de una string en otra función
-independiente que reciba una string y devuelva un entero.
-
-13. (15 minutos) Escribe un programa que acepte una cadena de caracteres (que
-podrá contener cualquier carácter a excepción del retorno de carro) y que la
-escriba al revés. Reutiliza la función del ejercicio para la entrada de teclado y
-otra función que invierta la cadena.
-
-14. (20 minutos) Escribe un programa que lee una cadena de caracteres de teclado
-e indique si es o no palíndroma (se lee igual de izquierda a derecha que de
-derecha a izquierda, sin tener en cuenta los espacios en blanco y las
-mayúsculas). Por ejemplo: "dábale arroz a la zorra el abad". Reutilice la
-función del ejercicio 12 para la entrada de teclado y cree otra función que
-dada una cadena de caracteres devuelva un boolean indicando si es o no
-palíndroma.*/
-
 import java.util.Scanner;
 import java.util.ArrayList;
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
+import static java.lang.Math.*;
 
 public
+//1
 void TiemposAnios(){
     Scanner sc = new Scanner(System.in);
     System.out.println("INTRODUZCA EL NUMERO DE ANIOS:");
@@ -54,11 +17,13 @@ void TiemposAnios(){
     int seconds = years*60*60*24*30*12+months*60*60*24*30+days*60*60*24;
     System.out.println("LOS SEGUNDOS DE LOS TIEMPOS INTRODUCIDOS SON: " +seconds);
 }
+//2
 void TamaniosDatos(){
     System.out.println("Máximo valor representable por un char: " + (int) Character.MAX_VALUE);
     System.out.println("Máximo valor representable por un short: " + Short.MAX_VALUE);
     System.out.println("Máximo valor representable por un int: " + Integer.MAX_VALUE);
 }
+//3
 void Multiplos5(){
     int contador = 0;
     int[] multiplos;
@@ -79,6 +44,7 @@ void Multiplos5(){
     }
     System.out.println("La suma de los multiplos de 5 es "+suma);
 }
+//4
 void MaxMin(){
 
     Scanner sc = new Scanner(System.in);
@@ -106,6 +72,7 @@ void MaxMin(){
     System.out.println("El número máximo introducido es " + max);
     System.out.println("El número mínimo introducido es " + min);
 }
+//5
 void TablaMultiplicar(){
     int N;
     Scanner sc = new Scanner(System.in);
@@ -125,6 +92,7 @@ void TablaMultiplicar(){
         System.out.println("\n");
     }
 }
+//6
 void Primos(){
     Scanner sc = new Scanner(System.in);
     System.out.print("Introduce hasta qué primo quieres llegar: ");
@@ -157,6 +125,7 @@ void Primos(){
     }
     System.out.println(Arrays.toString(primos));
    }
+//7
 void Factorizar() {
     int numero;
     System.out.print("Introduzca un número a factorizar: ");
@@ -183,6 +152,7 @@ void Factorizar() {
         }
         System.out.println("\nCantidad de factores encontrados: " + factores.size());
     }
+//8
 void calcularEstadisticas() {
     Scanner sc = new Scanner(System.in);
     ArrayList<Integer> numeros = new ArrayList<>();
@@ -217,9 +187,9 @@ void calcularEstadisticas() {
     System.out.println("El número máximo es: " + max);
     System.out.println("El número mínimo es: " + min);
 }
+//9
 void ProductoEscalar(){
     int n;
-
     System.out.println("Cuantas dimensiones quieres para los vectores? ");
     Scanner sc = new Scanner(System.in);
     n = sc.nextInt();
@@ -253,23 +223,182 @@ void ProductoEscalar(){
     System.out.println("A "+ vector1 +" * B "+ vector2 +" = "+ String.format("%.2f", resultado));
 
 }
+//10
+void imprimirMatriz(int[][] matriz) {
+    for (int[] fila : matriz) {
+        System.out.println(Arrays.toString(fila));
+    }
+}
+
+void MatrizSimetrica(){
+    int n;
+    System.out.println("Cuantas dimensiones quieres para las matrices? ");
+    Scanner sc = new Scanner(System.in);
+    n = sc.nextInt();
+    int [][]   matriz = new int[n][n];
+    int [][] matrizT  = new int[n][n];
+    int [][] matrizS = new int[n][n];
+
+    Random rand = new Random();
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            int randomNumbers = rand.nextInt(5);
+            matriz[i][j] = randomNumbers;
+            matrizT[j][i] = matriz[i][j];
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            matrizS[i][j] = matriz[i][j] + matrizT[i][j];
+        }
+    }
+    System.out.println("La matriz es: ");
+    imprimirMatriz(matriz);
+    System.out.println("La matriz Traspuesta es: ");
+    imprimirMatriz(matrizT);
+    System.out.println("La matriz Simetrica es: ");
+    imprimirMatriz(matrizS);
+}
+//11
+void MultiplicacionMatrices(){
+    int n;
+    System.out.println("Cuantas dimensiones quieres para las matrices? ");
+    Scanner sc = new Scanner(System.in);
+    n = sc.nextInt();
+    int [][] matrizA = new int[n][n];
+    int [][] matrizB  = new int[n][n];
+    int [][] matrizM = new int[n][n];
+    System.out.println("MATRIZ A:");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++){
+            System.out.println("Coordenda " +i+ "," +j+" : ");
+            matrizA[i][j] = sc.nextInt();
+        }
+    }
+    System.out.println("MATRIZ B:");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++){
+            System.out.println("Coordenda " +i+ "," +j+" : ");
+            matrizB[i][j] = sc.nextInt();
+        }
+    }
+    System.out.println("MATRIZ A*B:");
+
+        for(int k = 0; k < n; k++){
+            for(int i = 0; i < n; i++){
+                int aux = 0;
+                for(int j = 0; j < n; j++){
+                    aux += matrizA[i][j] * matrizB[j][i];
+                    System.out.println(aux);
+                }
+                matrizM[k][i] = aux;
+                System.out.println("!!"+ matrizM[k][i]+ "!!");
+            }
+        }
+    imprimirMatriz(matrizA);
+    System.out.println("    * ");
+    imprimirMatriz(matrizB);
+    System.out.println("    = ");
+    imprimirMatriz(matrizM);
+}
+//12
+void Vocales(){
+    System.out.println("Escribe una palabra o frase: ");
+    Scanner sc = new Scanner(System.in);
+    String input = sc.nextLine();
+    char[] caracteres = input.toCharArray();
+    int cuenta = 0;
+    for (int i = 0; i < caracteres.length; i++) {
+        if (caracteres[i] == 'a' || caracteres[i] == 'A'){
+            cuenta++;
+        }
+        if (caracteres[i] == 'e' || caracteres[i] == 'E'){
+            cuenta++;
+        }
+        if (caracteres[i] == 'i' || caracteres[i] == 'I'){
+            cuenta++;
+        }
+        if (caracteres[i] == 'o' || caracteres[i] == 'O'){
+            cuenta++;
+        }
+        if (caracteres[i] == 'u' || caracteres[i] == 'U'){
+            cuenta++;
+        }
+    }
+    System.out.println("En tu plabra/frase hay " + cuenta + " vocales!!");
+}
+//13
+void EscribirAlReves(){
+    System.out.println("Escribe una palabra o frase: ");
+    Scanner sc = new Scanner(System.in);
+    String input = sc.nextLine();
+    char[] caracteres = input.toCharArray();
+    char[] inversa = new char [caracteres.length];
+    for (int i = caracteres.length ; i > 0 ; i--) {
+        inversa[caracteres.length-i] = caracteres[i-1];
+    }
+    System.out.println("Palabra/Frase al reves: ");
+    System.out.println(new String(inversa));
+}
+//14
+void Palindromo(){
+    System.out.println("Escribe una palabra o frase: ");
+    Scanner sc = new Scanner(System.in);
+    String input = sc.nextLine();
+    char[] caracteres = input.toCharArray();
+    ArrayList<Character> nospace = new ArrayList<>();
+
+    for (int i = 0; i < caracteres.length; i++) {
+        if (caracteres[i] != ' ') {
+            nospace.add(Character.toLowerCase(caracteres[i]));
+        }
+    }
+    char[] inversa = new char [nospace.size()];
+    for (int i = nospace.size() ; i > 0 ; i--) {
+        inversa[nospace.size()-i] = nospace.get(i-1);
+    }
+    int contador = 0;
+    for (int i = 0; i < inversa.length; i++) {
+        if(inversa[i] == nospace.get(i)){
+            contador++;
+        }
+    }
+    if(contador == nospace.size()){
+        System.out.println("Palabra/Frase ''" +new String(caracteres)+"'' SI es un palindromo:");
+    }else{
+        System.out.println("Palabra/Frase ''" +new String(caracteres)+"'' NO es un palindromo:");
+    }
+    System.out.println(new String(caracteres) + " --> "+new String(inversa));
+}
+
 public void main() {
     //1
-   TiemposAnios();
+        TiemposAnios();
     //2
-    TamaniosDatos();
+        TamaniosDatos();
     //3
-    Multiplos5();
+        Multiplos5();
     //4
-    MaxMin();
+        MaxMin();
     //5
-    TablaMultiplicar();
+        TablaMultiplicar();
     //6
-    Primos();
+        Primos();
     //7
-    Factorizar();
+        Factorizar();
     //8
-    calcularEstadisticas();
+        calcularEstadisticas();
     //9
-    ProductoEscalar();
+        ProductoEscalar();
+    //10
+        MatrizSimetrica();
+    //11
+        MultiplicacionMatrices();
+    //12
+        Vocales();
+    //13
+        EscribirAlReves();
+    //14
+    Palindromo();
 }
